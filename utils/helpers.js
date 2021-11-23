@@ -35,16 +35,9 @@ export const setDummyData = () => {
       ]
     }
   }
-  return AsyncStorage.getItem(FLASHCARDS_KEY)
-  .then((res) => {
-    if (!res) {
-      const newData = JSON.stringify(data)
-      return AsyncStorage.setItem(FLASHCARDS_KEY,newData)
-      .then((res) => {
-        return data
-      });
-    }
-  })
+  const newData = JSON.stringify(data)
+  AsyncStorage.setItem(FLASHCARDS_KEY,newData)
+  return data;
 }
 
 const NOTIFICATION_KEY = 'FLASHCARDS_NOTIFICATIONS'
