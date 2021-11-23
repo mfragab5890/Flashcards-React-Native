@@ -72,6 +72,21 @@ export default class Quiz extends React.Component {
     }
   }
 
+  handleRestartQuiz = () => {
+    const { answersPool, questions } = this.props.navigation.state.params
+    this.setState({
+      totalQuestions : questions.length,
+      randomAnswer : answersPool[Math.floor(Math.random() * (answersPool.length) )],
+      answerdQuestions : 0,
+      questionInView : 0,
+      viewAnswer : false,
+      userAnswer : true,
+      quizFinshed : false,
+      correctQuestions : 0,
+      flipCard : false
+    })
+  }
+
   render() {
     const { navigation } = this.props
     const { deckId, answersPool, questions } = navigation.state.params
@@ -119,6 +134,8 @@ export default class Quiz extends React.Component {
           totalQuestions = {totalQuestions}
           correctQuestions = {correctQuestions}
           navigation = { navigation }
+          deckId = { deckId }
+          restartQuiz = {this.handleRestartQuiz}
         />
       )
     }
