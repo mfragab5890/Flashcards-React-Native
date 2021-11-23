@@ -3,15 +3,18 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity, Animated } from 're
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 class Decks extends React.Component {
   state = {
     opacity: new Animated.Value(0.99),
   }
 
-  componentDidMount(){
+  async componentDidMount(){
     const { dispatch } = this.props
-    dispatch(handleInitialData())
+    const FLASHCARDS_KEY = 'Flachcards:cards'
+    await AsyncStorage.removeItem(FLASHCARDS_KEY)
+    await dispatch(handleInitialData())
 
   }
 
