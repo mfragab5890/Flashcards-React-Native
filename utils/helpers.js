@@ -59,7 +59,7 @@ export const clearLocalNotification = () => {
 }
 const createNotification = () => {
   return {
-    title: 'Log Your Stats!',
+    title: 'your quiz is waiting!',
     body: "👋 Don't forget to take your quiz for today",
     ios: {
       sound:true
