@@ -3,24 +3,41 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class Score extends React.Component {
   render() {
-    const { correctQuestions, totalQuestions, navigation } = this.props
+    const {
+      correctQuestions,
+      totalQuestions,
+      navigation,
+      deckId,
+      restartQuiz
+    } = this.props
 
     return (
       <View style = {styles.container}>
         <View style = { styles.item }>
-          <Text style = { [styles.subHeader, { color:"green" }] }>
-            congrats you finshed this quiz and your score is
+          <Text style = { [styles.header, { color:"green" }] }>
+            Congrats you finshed this quiz and your score is
           </Text>
-          <Text style = { styles.subHeader }>{correctQuestions}/{totalQuestions}</Text>
+          <Text style = { styles.header }>{correctQuestions}/{totalQuestions}</Text>
         </View>
         <View style = {{ flex : 1 }}>
           <TouchableOpacity
             style = {[styles.btn, styles.bottom]}
             onPress = {() => navigation.navigate('Decks')}
           >
-            <Text style = {styles.subHeader}>Go Back To Your Decks!</Text>
+            <Text style = {styles.subHeader}>Back To Decks!</Text>
           </TouchableOpacity>
-          <View style = {{flex:1}}></View>
+          <TouchableOpacity
+            style = {[styles.btn, styles.bottom]}
+            onPress = {() => restartQuiz()}
+          >
+            <Text style = {styles.subHeader}>Restart Quiz!</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style = {[styles.btn, styles.bottom]}
+            onPress = {() => navigation.navigate('Deck',{ deckId: deckId })}
+          >
+            <Text style = {styles.subHeader}>Back To {deckId}!</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -38,7 +55,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   item:{
-    flex: 1.5,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
@@ -52,16 +69,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   subHeader: {
-    fontSize: 25,
+    fontSize: 15,
     textAlign: 'center',
     marginTop: 5,
+    flexWrap: 'wrap',
   },
   btn:{
-    flex:1,
     alignContent: 'center',
     justifyContent: 'flex-start',
     alignSelf: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
+    alignContent: 'stretch',
     borderColor: '#302718',
     borderWidth: 2,
     borderBottomWidth: 4,
@@ -69,10 +87,10 @@ const styles = StyleSheet.create({
     margin: 5,
     marginVertical: 10,
     padding: 5,
-    width: '70%'
+    height: '20%',
+    width: 200
   },
   bottom: {
-    flex : 0.5,
     justifyContent: 'center',
     alignItems: 'stretch',
     borderBottomColor: 'brown',
